@@ -1,6 +1,8 @@
 package com.radhikaspringboot.crudoperations.service;
 
+import com.radhikaspringboot.crudoperations.entity.Address;
 import com.radhikaspringboot.crudoperations.entity.Student;
+import com.radhikaspringboot.crudoperations.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.radhikaspringboot.crudoperations.repository.StudentRepository;
@@ -26,6 +28,17 @@ public class StudentService {
     {
        return studentRepository.findAll();
     }
+
+    public Student createStudent(Student student) {
+        // Ensure each address has a reference to the student
+        for (Address address : student.getAddresses()) {
+            address.setStudent(student);
+        }
+
+        return studentRepository.save(student);
+    }
+
+
 
 
     //save student
@@ -66,4 +79,6 @@ public class StudentService {
         return studentRepository.save(existing_student);
 
     }
+
+
 }

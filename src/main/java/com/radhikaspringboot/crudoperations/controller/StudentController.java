@@ -1,6 +1,9 @@
 package com.radhikaspringboot.crudoperations.controller;
 
+import com.radhikaspringboot.crudoperations.dto.StudentDto;
 import com.radhikaspringboot.crudoperations.entity.Student;
+import com.radhikaspringboot.crudoperations.repository.AddressRepository;
+import com.radhikaspringboot.crudoperations.repository.StudentRepository;
 import com.radhikaspringboot.crudoperations.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +12,12 @@ import java.util.List;
 
 @RestController
 public class StudentController {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private StudentService studentService;
@@ -23,22 +32,29 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @PostMapping("/addstudents")
-    public List <Student> addStudents(@RequestBody List <Student> students) {
-        return studentService.saveStudents(students);
+//    @PostMapping("/addstudentwithAddress")
+//    public Student addStudents(@RequestBody StudentDto studentDto) {
+//        return studentRepository.save(studentDto.getStudent());
+//    }
+
+    @PostMapping("/createstudent")
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.createStudent(student);
     }
 
-    @PostMapping("/addStudent")
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.saveStudent(student);
-    }
+//    @PostMapping("/addStudent")
+//    public Student addStudent(@RequestBody Student student) {
+//        return studentService.saveStudent(student);
+//    }
+
+
 
     @DeleteMapping("/delete/{id}")
     public String deleteStudentById(@PathVariable int id) {
         return studentService.deleteStudentByID(id);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/delete-all")
     public String deleteallStudents() {
        return studentService.deleteAll();
     }
