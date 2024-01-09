@@ -1,6 +1,7 @@
 package com.radhikaspringboot.crudoperations.controller;
 
 import com.radhikaspringboot.crudoperations.dto.StudentDto;
+import com.radhikaspringboot.crudoperations.entity.Address;
 import com.radhikaspringboot.crudoperations.entity.Student;
 import com.radhikaspringboot.crudoperations.repository.AddressRepository;
 import com.radhikaspringboot.crudoperations.repository.StudentRepository;
@@ -59,9 +60,14 @@ public class StudentController {
        return studentService.deleteAll();
     }
 
-    @PutMapping("update")
+    @PutMapping("/updateStudent")
     public Student updateStudentById(@RequestBody Student student) {
         return studentService.updateStudent(student);
     }
 
+    @PutMapping("/updateAddress/{studentID}")
+    public Address updateAddress(@PathVariable("studentID") int studentId,@RequestBody Address address)
+    {
+       return  studentService.updateStudentAddress(studentId,address);
+    }
 }

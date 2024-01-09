@@ -15,7 +15,8 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-
+    @Autowired
+    private AddressRepository addressRepository;
 
     //Get student by Id
     public Student getStudentById(int id)
@@ -78,6 +79,21 @@ public class StudentService {
         existing_student.setAddress(student.getAddress());
         return studentRepository.save(existing_student);
 
+    }
+    
+    public Address updateStudentAddress(int studentID, Address address)
+    {
+        Student existingStudent = studentRepository.findById(studentID).orElse(null);
+        List<Address> addresses = existingStudent.getAddresses();
+        for (Address addrs : addresses) {
+            if(addrs.getAddressType().toString().equals("Primary")) {
+                addrs.setCity(address.getCity());
+                addrs.setStreet(address.getStreet());
+                addressRepository.save(addrs);
+
+            }
+        }
+        return address;
     }
 
 
