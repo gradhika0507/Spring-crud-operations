@@ -2,6 +2,7 @@ package com.radhikaspringboot.crudoperations.service;
 
 import com.radhikaspringboot.crudoperations.repository.AddressRepository;
 import com.radhikaspringboot.crudoperations.entity.Address;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class AddressService {
 
+    @Autowired
     private AddressRepository addressRepository;
 
     //save address
