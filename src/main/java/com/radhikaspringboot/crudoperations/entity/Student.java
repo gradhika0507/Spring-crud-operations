@@ -28,5 +28,8 @@ public class Student {
 //    @OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL)
 //    @JoinColumn(name= "student_id", referencedColumnName = "id")
 //    private List <Address> addressList;
+
+
+
 }
 
